@@ -21,7 +21,7 @@ class Command(BaseCommand):
                 description=fake.paragraph(nb_sentences=3),
                 deadline=timezone.make_aware(fake.date_time_this_month()),
                 status=fake.random_element(
-                    elements=["Pending", "InProgress", "Completed"]
+                    elements=["Pending", "In Progress ", "Completed"]
                     ),
                 category=Category.objects.order_by('?').first(),
                 priority=Priority.objects.order_by('?').first()
@@ -52,7 +52,7 @@ class Command(BaseCommand):
                 parent_task=Task.objects.order_by('?').first(),
                 title=fake.sentence(nb_words=5),
                 status=fake.random_element(
-                    elements=["Pending", "InProgress", "Completed"]
+                    elements=["Pending", "In Progress ", "Completed"]
                     )
             )
 

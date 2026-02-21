@@ -56,7 +56,7 @@ class SubTask(BaseModel):
         ("In Progress ", "In Progress"),
         ("Completed", "Completed"),
         ],
-        default="Pending"
+        default="pending"
     )
 
     def __str__(self):
