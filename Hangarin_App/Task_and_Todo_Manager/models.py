@@ -21,8 +21,8 @@ class Priority(BaseModel):
         return self.name
     
 class Task(BaseModel):
-    title = models.CharField(max_length=100)
-    description = models.CharField(max_length=250)
+    title = models.CharField(max_length=200)
+    description = models.CharField(max_length=500)
     deadline = models.DateTimeField()
     status = models.CharField(
         max_length=50,
@@ -48,7 +48,7 @@ class Note(BaseModel):
 
 class SubTask(BaseModel):
     parent_task = models.ForeignKey(Task, on_delete=models.CASCADE)
-    title = models.CharField(max_length=100)
+    title = models.CharField(max_length=500)
     status = models.CharField(
         max_length=50,
         choices=[
