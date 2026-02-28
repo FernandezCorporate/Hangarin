@@ -31,11 +31,11 @@
         
 
         <div class="row">
-            <table class="table table-striped mt-3">
+            <table class="table table-striped mt-2">
                 <thead>
                     <tr>
                         <th scope="col">Title</th>
-                        <th scope="col">Status</th>
+                        <th scope="col" class="text-center">Status</th>
                         <th scope="col">Deadline</th>
                         <th scope="col">Priority</th>
                         <th scope="col">Category</th>
@@ -47,10 +47,41 @@
                     {% for object in object_list %}
                         <tr>
                             <td>{{ object.title }}</td>
-                            <td>{{ object.status }}</td>
+                            <td class="text-center">
+                                <div class="status
+                                        {% if object.status == 'Pending' %}status-yellow
+                                        {% elif object.status == 'In Progress ' %}status-blue
+                                        {% elif object.status == 'Completed' %}status-green
+                                        {% endif %}">
+                                    <p style="text-align: center;" class="fw-bold mb-0">{{ object.status }}</p>
+                                </div>
+                            </td>
+
                             <td>{{ object.deadline }}</td>
-                            <td>{{ object.priority }}</td>
-                            <td>{{ object.category }}</td>
+
+                            <td class="text-center">
+                                <div class="priority
+                                        {% if object.priority.name == 'low' %}priority-green
+                                        {% elif object.priority.name == 'medium' %}priority-blue
+                                        {% elif object.priority.name == 'high' %}priority-red
+                                        {% elif object.priority.name == 'optional' %}priority-grey
+                                        {% elif object.priority.name == 'critical' %}priority-scarlet
+                                        {% endif %}">
+                                    <p style="text-align: center;" class="fw-bold mb-0">{{ object.priority }}</p>
+                                </div>
+                            </td>
+
+                            <td class="text-center">
+                                <div class="category
+                                        {% if object.category.name == 'School' %}category-purple
+                                        {% elif object.category.name == 'Projects' %}category-red
+                                        {% elif object.category.name == 'Personal' %}category-pink
+                                        {% elif object.category.name == 'Work' %}category-darkPurple
+                                        {% elif object.category.name == 'Finance' %}category-green
+                                        {% endif %}">
+                                    <p style="text-align: center;" class="fw-bold mb-0">{{ object.category }}</p>
+                                </div>
+                            </td>
                             <td>
                                 <a href="">Edit</a>
                                 <a href="" class="text-danger">Delete</a>
