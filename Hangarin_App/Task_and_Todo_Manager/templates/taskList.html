@@ -1,0 +1,68 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<div class="taskcontent">
+    <div class="icons container">
+        <div class="row d-flex">
+            <div class="col-10">
+                <form action="" class="search">
+                    <input type="text" class="form-control rounded-pill" placeholder="Search ..." name="q" style="width: 40vw;">
+                </form>
+            </div>
+            <div class="col-2 misc">
+                <a href=""><img src="{% static 'img/Calendar.png' %}" alt=""></a>
+                 <a href=""></a><img src="{% static 'img/Doorbell.png' %}" alt=""></a>
+                 <a href=""></a><img src="{% static 'img/Email.png' %}" alt=""></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container tableInfo">
+        <div class="row align-items-end">
+            <div class="col-auto">
+                <p class="fw-bold mb-1" style="font-size: 40px;">My Tasks</p>
+            </div>
+            <div class="col-auto">
+                <a href="" class="text-decoration-none">
+                    <div class="button d-flex align-items-center justify-content-center mb-3">
+                        <p class="fw-bold mb-0">Add Task</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        
+
+        <div class="row">
+            <table class="table table-striped mt-3">
+                <thead>
+                    <tr>
+                        <th scope="col">Title</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Deadline</th>
+                        <th scope="col">Priority</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for object in object_list %}
+                        <tr>
+                            <td>{{ object.title }}</td>
+                            <td>{{ object.status }}</td>
+                            <td>{{ object.deadline }}</td>
+                            <td>{{ object.priority }}</td>
+                            <td>{{ object.category }}</td>
+                            <td>
+                                <a href="">Edit</a>
+                                <a href="" class="text-danger">Delete</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+
+        {% include 'includes/pagination.html' %}
+    </div>
+</div>
+{% endblock %}
