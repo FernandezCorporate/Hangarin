@@ -12,8 +12,65 @@
 
                         <div class="card-body">
                             <form class="" action="" method="post" novalidate>
-                                {% csrf_token %} {% include 'includes/form.html' %}
+                                {% csrf_token %} 
 
+								{% load widget_tweaks %}
+
+								{% if form.non_field_errors %}
+									<div class="alert alert-danger" role="alert">
+										{% for error in form.non_field_errors %}
+											<p{% if forloop.last %} class="mb-0"{% endif %}>{{ error }}</p>
+										{% endfor %}
+									</div>
+								{% endif %}
+
+								<div class="container">
+									<div class="row">
+										<div class="col-5">
+											<div class="form-group">
+												<label>Title</label>
+												{% render_field form.title class="form-control"%}
+											</div>
+										</div>
+
+										<div class="col-5">
+											<div class="form-group">
+												<label>Deadline</label>
+												{% render_field form.deadline class="form-control" %}
+											</div>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-12 mt-3">
+											<div class="form-group">
+												<label>Description</label>
+												{% render_field form.description class="form-control" %}
+											</div>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-4 mt-3">
+											<div class="form-group">
+												<label>Status</label>
+												{% render_field form.status class="form-control" %}
+											</div>
+										</div>
+										<div class="col-4 mt-3">
+											<div class="form-group">
+												<label>Category</label>
+												{% render_field form.category class="form-control" %}
+											</div>         
+										</div>
+										<div class="col-4 mt-3">
+											<div class="form-group">
+												<label>Priority</label>
+												{% render_field form.priority class="form-control" %}
+											</div>          
+										</div>
+									</div>
+								</div>
                                 <div class="form-group">
                                     <div class="col-md-12 col-sm-3 mt-3 text-end">
                                         <button type="submit" class="btn btn-primary btn-rounded">Submit</button>
