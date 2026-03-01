@@ -5,7 +5,7 @@ justify-content-between mt-0">
         <ul class="pagination">
             {% if page_obj.number > 1 %}
             <li class="page-item">
-                <a class="page-link" href="?page=1&q={{ request.GET.q }}&sort_by={{ request.GET.sort_by }}">First</a>
+                <a class="page-link" href="?page=1&q={{ request.GET.q }}&sort_by={{ request.GET.sort_by }}&priority={{ request.GET.priority }}&category={{ request.GET.category }}&status={{ request.GET.status }}">First</a>
             </li>
             {% else %}
             <li class="page-item disabled">
@@ -15,7 +15,7 @@ justify-content-between mt-0">
 
             {% if page_obj.has_previous %}
             <li class="page-item">
-                <a class="page-link" href="?page={{ page_obj.previous_page_number }}&q={{ request.GET.q }}&sort_by={{ request.GET.sort_by }}">Prev</a>
+                <a class="page-link" href="?page={{ page_obj.previous_page_number }}&q={{ request.GET.q }}&sort_by={{ request.GET.sort_by }}&priority={{ request.GET.priority }}&category={{ request.GET.category }}&status={{ request.GET.status }}">Prev</a>
             </li>
             {% else %}
             <li class="page-item disabled">
@@ -33,14 +33,14 @@ justify-content-between mt-0">
                 </li>
                 {% elif page_num > page_obj.number|add:'-3' and page_num < page_obj.number|add:'3' %}
                 <li class="page-item">
-                    <a class="page-link" href="?page={{ page_num }}&q={{ request.GET.q }}&sort_by={{ request.GET.sort_by }}">{{ page_num }}</a>
+                    <a class="page-link" href="?page={{ page_num }}&q={{ request.GET.q }}&sort_by={{ request.GET.sort_by }}&priority={{ request.GET.priority }}&category={{ request.GET.category }}&status={{ request.GET.status }}">{{ page_num }}</a>
                 </li>
                 {% endif %}
             {% endfor %}
 
             {% if page_obj.has_next %}
             <li class="page-item">
-                <a class="page-link" href="?page={{ page_obj.next_page_number }}&q={{ request.GET.q }}&sort_by={{ request.GET.sort_by }}">Next</a>
+                <a class="page-link" href="?page={{ page_obj.next_page_number }}&q={{ request.GET.q }}&sort_by={{ request.GET.sort_by }}&priority={{ request.GET.priority }}&category={{ request.GET.category }}&status={{ request.GET.status }}">Next</a>
             </li>
             {% else %}
             <li class="page-item disabled">
@@ -50,7 +50,7 @@ justify-content-between mt-0">
 
             {% if page_obj.number != paginator.num_pages %}
             <li class="page-item">
-                <a class="page-link" href="?page={{ paginator.num_pages }}&q={{ request.GET.q }}&sort_by={{ request.GET.sort_by }}">Last</a>
+                <a class="page-link" href="?page={{ paginator.num_pages }}&q={{ request.GET.q }}&sort_by={{ request.GET.sort_by }}&priority={{ request.GET.priority }}&category={{ request.GET.category }}&status={{ request.GET.status }}">Last</a>
             </li>
             {% else %}
             <li class="page-item disabled">

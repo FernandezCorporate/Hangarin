@@ -3,8 +3,13 @@
     <div class="icons container">
         <div class="row d-flex">
             <div class="col-10">
-                <form action="{% url 'task-list' %}" class="search">
-                    <input type="text" class="form-control rounded-pill" placeholder="Search ..." name="q" style="width: 40vw;">
+                <form action="{% url 'task-list' %}" method="get" class="search">
+                    <input type="text" class="form-control rounded-pill" placeholder="Search ..." name="q" value="{{ request.GET.q }}" style="width: 40vw;">
+                    
+                    <input type="hidden" name="priority" value="{{ request.GET.priority|default:'All' }}">
+                    <input type="hidden" name="category" value="{{ request.GET.category|default:'All' }}">
+                    <input type="hidden" name="status" value="{{ request.GET.status|default:'All' }}">
+                    <input type="hidden" name="sort_by" value="{{ request.GET.sort_by|default:'status' }}">
                 </form>
             </div>
             <div class="col-2 misc">
@@ -15,7 +20,7 @@
         </div>
     </div>
 
-    <div class="container tableInfo mt-4">
+    <div class="container tableInfo mt-2">
         <div class="row align-items-center mb-3"> 
             <div class="col-auto">
                 <h1 class="fw-bold mb-0" style="font-size: 36px; line-height: 1;">My Tasks</h1>
@@ -30,23 +35,62 @@
             </div>
 
             <div class="col-auto ms-auto"> 
-                <form action="{% url 'task-list' %}" method="get" class="d-flex align-items-center gap-2">
+                <form action="{% url 'task-list' %}" method="get" class="d-flex align-items-end gap-2">
+                    
                     {% if request.GET.q %}
                         <input type="hidden" name="q" value="{{ request.GET.q }}">
                     {% endif %}
+      
+                    <div class="d-flex flex-column">
+                        <label class="text-muted fw-bold mb-1" style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px;">Sort By</label>
+                        <select name="sort_by" class="form-select form-select-sm shadow-sm" style="width: 140px; height: 35px; cursor: pointer;">
+                            <option value="status" {% if request.GET.sort_by == "status" %}selected{% endif %}>Status</option>
+                            <option value="category__name" {% if request.GET.sort_by == "category__name" %}selected{% endif %}>Category</option>
+                            <option value="priority" {% if request.GET.sort_by == "priority" %}selected{% endif %}>Priority</option>
+                            <option value="deadline" {% if request.GET.sort_by == "deadline" %}selected{% endif %}>Deadline</option>
+                        </select>
+                    </div>
                     
-                    <select name="sort_by" class="form-select form-select-sm shadow-sm" style="width: 160px; height: 38px; cursor: pointer;">
-                        <option value="status" {% if request.GET.sort_by == "status" %}selected{% endif %}>Sort by Status</option>
-                        <option value="category__name" {% if request.GET.sort_by == "category__name" %}selected{% endif %}>Sort by Category</option>
-                        <option value="priority__name" {% if request.GET.sort_by == "priority__name" %}selected{% endif %}>Sort by Priority</option>
-                    </select>
-                    
-                    <button type="submit" class="btn btn-outline-primary shadow-sm" style="height: 38px;">
+                    <div class="d-flex flex-column">
+                        <label class="text-muted fw-bold mb-1" style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px;">Priority</label>
+                        <select name="priority" class="form-select form-select-sm shadow-sm" style="width: 110px; height: 35px; cursor: pointer;">
+                            <option value="All" {% if request.GET.priority == "All" or not request.GET.priority %}selected{% endif %}>All</option>
+                            <option value="Optional" {% if request.GET.priority == "Optional" %}selected{% endif %}>Optional</option>
+                            <option value="Low" {% if request.GET.priority == "Low" %}selected{% endif %}>Low</option>
+                            <option value="Medium" {% if request.GET.priority == "Medium" %}selected{% endif %}>Medium</option>
+                            <option value="High" {% if request.GET.priority == "High" %}selected{% endif %}>High</option>
+                            <option value="Critical" {% if request.GET.priority == "Critical" %}selected{% endif %}>Critical</option>
+                        </select>
+                    </div>
+
+                    <div class="d-flex flex-column">
+                        <label class="text-muted fw-bold mb-1" style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px;">Category</label>
+                        <select name="category" class="form-select form-select-sm shadow-sm" style="width: 110px; height: 35px; cursor: pointer;">
+                            <option value="All" {% if request.GET.category == "All" or not request.GET.category %}selected{% endif %}>All</option>
+                            <option value="School" {% if request.GET.category == "School" %}selected{% endif %}>School</option>
+                            <option value="Projects" {% if request.GET.category == "Projects" %}selected{% endif %}>Projects</option>
+                            <option value="Personal" {% if request.GET.category == "Personal" %}selected{% endif %}>Personal</option>
+                            <option value="Work" {% if request.GET.category == "Work" %}selected{% endif %}>Work</option>
+                            <option value="Finance" {% if request.GET.category == "Finance" %}selected{% endif %}>Finance</option>
+                        </select>
+                    </div>
+
+                    <div class="d-flex flex-column">
+                        <label class="text-muted fw-bold mb-1" style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px;">Status</label>
+                        <select name="status" class="form-select form-select-sm shadow-sm" style="width: 110px; height: 35px; cursor: pointer;">
+                            <option value="All" {% if request.GET.status == "All" or not request.GET.status %}selected{% endif %}>All</option>
+                            <option value="Completed" {% if request.GET.status == "Completed" %}selected{% endif %}>Completed</option>
+                            <option value="In Progress " {% if request.GET.status == "In Progress " %}selected{% endif %}>In Progress</option>
+                            <option value="Pending" {% if request.GET.status == "Pending" %}selected{% endif %}>Pending</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary shadow-sm" style="height: 35px; padding: 0 15px;">
                         Filter
                     </button>
                 </form>
             </div>
-        </div>
+
         
 
         <div class="row">
@@ -80,11 +124,11 @@
 
                             <td class="text-center">
                                 <div class="priority
-                                        {% if object.priority.name == 'low' %}priority-green
-                                        {% elif object.priority.name == 'medium' %}priority-blue
-                                        {% elif object.priority.name == 'high' %}priority-red
-                                        {% elif object.priority.name == 'optional' %}priority-grey
-                                        {% elif object.priority.name == 'critical' %}priority-scarlet
+                                        {% if object.priority.name == 'Low' %}priority-green
+                                        {% elif object.priority.name == 'Medium' %}priority-blue
+                                        {% elif object.priority.name == 'High' %}priority-red
+                                        {% elif object.priority.name == 'Optional' %}priority-grey
+                                        {% elif object.priority.name == 'Critical' %}priority-scarlet
                                         {% endif %}">
                                     <p style="text-align: center;" class="fw-bold mb-0">{{ object.priority }}</p>
                                 </div>
