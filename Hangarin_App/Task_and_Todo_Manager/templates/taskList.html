@@ -3,7 +3,7 @@
     <div class="icons container">
         <div class="row d-flex">
             <div class="col-10">
-                <form action="" class="search">
+                <form action="{% url 'task-list' %}" class="search">
                     <input type="text" class="form-control rounded-pill" placeholder="Search ..." name="q" style="width: 40vw;">
                 </form>
             </div>
@@ -27,11 +27,21 @@
                     </div>
                 </a>
             </div>
+            <div class="col-auto">
+                <form action="{% url 'task-list' %}">
+                    <select name="sort_by" id="">
+                        <option value="status" {% if request.GET.sort_by == "status" %}selected{% endif %}>Status</option>
+                        <option value="category__name" {% if request.GET.sort_by == "category__name" %}selected{% endif %}>Category</option>
+                        <option value="priority__name" {% if request.GET.sort_by == "priority__name" %}selected{% endif %}>Priority</option>
+                    </select>
+                    <button type="submit" class="btn btn-primary btn-rounded">Filter</button>
+                </form>
+            </div>
         </div>
         
 
         <div class="row">
-            <table class="table table-striped mt-2">
+            <table class="table mt-2">
                 <thead>
                     <tr>
                         <th scope="col">Title</th>
