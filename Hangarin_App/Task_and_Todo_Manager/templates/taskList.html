@@ -15,26 +15,35 @@
         </div>
     </div>
 
-    <div class="container tableInfo">
-        <div class="row align-items-end">
+    <div class="container tableInfo mt-4">
+        <div class="row align-items-center mb-3"> 
             <div class="col-auto">
-                <p class="fw-bold mb-1" style="font-size: 40px;">My Tasks</p>
+                <h1 class="fw-bold mb-0" style="font-size: 36px; line-height: 1;">My Tasks</h1>
             </div>
+            
             <div class="col-auto">
                 <a href="{% url 'task-add' %}" class="text-decoration-none">
-                    <div class="button d-flex align-items-center justify-content-center mb-3">
-                        <p class="fw-bold mb-0">Add Task</p>
+                    <div class="btn btn-success d-flex align-items-center shadow-sm" style="height: 38px;">
+                        <i class="fas fa-plus"></i> <span class="fw-bold">Add Task</span>
                     </div>
                 </a>
             </div>
-            <div class="col-auto">
-                <form action="{% url 'task-list' %}">
-                    <select name="sort_by" id="">
-                        <option value="status" {% if request.GET.sort_by == "status" %}selected{% endif %}>Status</option>
-                        <option value="category__name" {% if request.GET.sort_by == "category__name" %}selected{% endif %}>Category</option>
-                        <option value="priority__name" {% if request.GET.sort_by == "priority__name" %}selected{% endif %}>Priority</option>
+
+            <div class="col-auto ms-auto"> 
+                <form action="{% url 'task-list' %}" method="get" class="d-flex align-items-center gap-2">
+                    {% if request.GET.q %}
+                        <input type="hidden" name="q" value="{{ request.GET.q }}">
+                    {% endif %}
+                    
+                    <select name="sort_by" class="form-select form-select-sm shadow-sm" style="width: 160px; height: 38px; cursor: pointer;">
+                        <option value="status" {% if request.GET.sort_by == "status" %}selected{% endif %}>Sort by Status</option>
+                        <option value="category__name" {% if request.GET.sort_by == "category__name" %}selected{% endif %}>Sort by Category</option>
+                        <option value="priority__name" {% if request.GET.sort_by == "priority__name" %}selected{% endif %}>Sort by Priority</option>
                     </select>
-                    <button type="submit" class="btn btn-primary btn-rounded">Filter</button>
+                    
+                    <button type="submit" class="btn btn-outline-primary shadow-sm" style="height: 38px;">
+                        Filter
+                    </button>
                 </form>
             </div>
         </div>
