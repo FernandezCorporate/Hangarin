@@ -1,4 +1,135 @@
-{% extends 'base.html' %} {% load static %} {% block content %}
+{% extends 'base.html' %} 
+{% load static %} 
+{% block content %}
 <div class="homecontent">
+    <div class="container card-container mt-3">
+        <div class="row">
+            <div class="col-auto">
+                <p class="fw-bold" style="font-size: 30px;text-shadow: 0 4px 3px rgba(0, 0, 0, 0.3);">Statistics</p>
+            </div>
+        </div>
+        <div class="row justify-content-center gy-3">
+            <div class="col-auto rounded me-4" style="background-color: #1F8ED3;width: 230px;height: 120px;box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.3);">    
+                <div class="row h-100 g-0 align-items-center justify-content-center">
+                    <div class="col-auto g-0">
+                        <img src="{% static 'img/Tasklist.png' %}" alt="" class="me-2" style="width: 100px;height: 100px;">
+                    </div>
+                    <div class="col-auto g-0">
+                        <div class="row g-0">
+                            <p class="fw-bolder mt-3 mb-0" style="font-size: 40px;line-height: 1;">{{ total_tasks }}</p>
+                        </div>
+                        <div class="row g-0">
+                            <p class="mb-0" style="font-size: 20px;">Total Tasks</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-auto rounded me-4" style="background-color: white;width: 230px;height: 120px;box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.3);">    
+                <div class="row h-100 g-0 align-items-center justify-content-center">
+                    <div class="col-auto g-0">
+                        <img src="{% static 'img/Task Completed.png' %}" alt="" class="me-2" style="width: 100px;height: 100px;">
+                    </div>
+                    <div class="col-auto g-0" style="color: #4A961C">
+                        <div class="row g-0">
+                            <p class="fw-bolder mt-3 mb-0" style="font-size: 40px;line-height: 1;">{{ completed }}</p>
+                        </div>
+                        <div class="row g-0">
+                            <p class="mb-0" style="font-size: 20px;">Completed</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-auto rounded me-4" style="background-color: white;width: 230px;height: 120px;box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.3);">    
+                <div class="row h-100 g-0 align-items-center justify-content-center">
+                    <div class="col-auto g-0">
+                        <img src="{% static 'img/In Progress.png' %}" alt="" class="me-2" style="width: 90px;height: 90px;">
+                    </div>
+                    <div class="col-auto g-0" style="color: #1F74C8">
+                        <div class="row g-0">
+                            <p class="fw-bolder mt-3 mb-0" style="font-size: 40px;line-height: 1;">{{In_Progress}}</p>
+                        </div>
+                        <div class="row g-0">
+                            <p class="mb-0" style="font-size: 20px;">In Progress</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-auto rounded me-4" style="background-color: white;width: 230px;height: 120px;box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.3);">    
+                <div class="row h-100 g-0 align-items-center justify-content-center">
+                    <div class="col-auto g-0">
+                        <img src="{% static 'img/Hourglass.png' %}" alt="" class="me-2" style="width: 100px;height: 100px;">
+                    </div>
+                    <div class="col-auto g-0" style="color: #BEC035">
+                        <div class="row g-0">
+                            <p class="fw-bolder mt-3 mb-0" style="font-size: 40px;line-height: 1;">{{ Pending }}</p>
+                        </div>
+                        <div class="row g-0">
+                            <p class="mb-0" style="font-size: 20px;">Pending</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container card-container mt-5">
+        <div class="row">
+            <div class="col-auto">
+                <p class="fw-bold" style="font-size: 30px;text-shadow: 0 4px 3px rgba(0, 0, 0, 0.3);">Analytics</p>
+            </div>
+        </div>
+        <div class="row justify-content-center gy-3">
+            <div class="col-auto rounded me-4" style="background-color: #2BC852;width: 230px;height: 120px;box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.3);">    
+                <div class="row h-100 g-0 align-items-center justify-content-center">
+                    <div class="col-auto g-0">
+                        <img src="{% static 'img/Combo Chart.png' %}" alt="" class="me-2" style="width: 80px;height: 80px;">
+                    </div>
+                    <div class="col-auto g-0">
+                        <div class="row g-0">
+                            <p class="fw-bolder mt-3 mb-0" style="font-size: 40px;line-height: 1;">{{ Completion_rate }}</p>
+                        </div>
+                        <div class="row g-0">
+                            <p class="mb-0" style="font-size: 13px;">Completion Rate</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-auto rounded me-4" style="background-color: #1F8ED3;width: 230px;height: 120px;box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.3);">    
+                <div class="row h-100 g-0 align-items-center justify-content-center">
+                    <div class="col-auto g-0">
+                        <img src="{% static 'img/Flash On.png' %}" alt="" class="me-2" style="width: 80px;height: 80px;">
+                    </div>
+                    <div class="col-auto g-0" style="color: white">
+                        <div class="row g-0">
+                            <p class="fw-bolder mt-3 mb-0" style="font-size: 40px;line-height: 1;">{{ Compliancy_rate }}</p>
+                        </div>
+                        <div class="row g-0">
+                            <p class="mb-0" style="font-size: 13px;">Compliancy Rate</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-auto rounded me-4" style="background-color: #DA5454;width: 230px;height: 120px;box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.3);">    
+                <div class="row h-100 g-0 align-items-center justify-content-center">
+                    <div class="col-auto g-0">
+                        <img src="{% static 'img/Brake Warning.png' %}" alt="" class="me-2" style="width: 80px;height: 80px;">
+                    </div>
+                    <div class="col-auto g-0" style="color: white">
+                        <div class="row g-0">
+                            <p class="fw-bolder mt-3 mb-0" style="font-size: 40px;line-height: 1;">{{ Deliquency_rate }}</p>
+                        </div>
+                        <div class="row g-0">
+                            <p class="mb-0" style="font-size: 13px;">Deliquency Rate</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}

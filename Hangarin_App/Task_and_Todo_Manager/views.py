@@ -4,12 +4,66 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from Task_and_Todo_Manager.models import Task
 from Task_and_Todo_Manager.forms import TaskForm
 from django.urls import reverse_lazy
-from django.db.models import Q
+from django.db.models import Q, F
 
 class HomePageView(ListView):
     model = Task
     context_object_name = 'home'
     template_name = "home.html"
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["total_tasks"] = Task.objects.count()
+
+        completed = Task.objects.filter(
+            status="Completed"
+        ).count()
+
+        context["completed"] = completed
+
+        In_Progress = Task.objects.filter(
+            status="In Progress "
+        ).count()
+
+        context["In_Progress"] = In_Progress
+
+        Pending = Task.objects.filter(
+            status="Pending"
+        ).count()
+
+        context["Pending"] = Pending
+
+        completed_onTime = Task.objects.filter(
+            status="Completed",
+            updated_at__lte=F('deadline')
+        ).count()
+
+        completed_late = Task.objects.filter(
+            status="Completed",
+            updated_at__gt=F('deadline')
+        ).count()
+
+        if completed > 0:
+            completion_rate = int((completed/context["total_tasks"]) * 100)
+        else:
+            completion_rate = 0
+
+        if completed_onTime:
+            compliancy_rate = int((completed_onTime/completed) * 100)
+        else:
+            compliancy_rate = 0
+
+        if completed_late:
+            deliquency_rate = int((completed_late/completed) * 100)
+        else:
+            deliquency_rate = 0
+
+
+        context["Completion_rate"] = f"{completion_rate}%"
+        context["Compliancy_rate"] = f"{compliancy_rate}%"
+        context["Deliquency_rate"] = f"{deliquency_rate}%"
+        
+        return context
 
 class TaskView(ListView):
     model = Task
@@ -18,20 +72,16 @@ class TaskView(ListView):
     paginate_by = 5
 
     def get_queryset(self):
-        # 1. Start with the full list
         qs = super().get_queryset()
         
-        # 2. Get values from URL
         query = self.request.GET.get('q')
         p_val = self.request.GET.get('priority')
         c_val = self.request.GET.get('category')
         s_val = self.request.GET.get('status')
 
-        # 3. Apply Search (Only if query exists)
         if query:
             qs = qs.filter(title__icontains=query)
 
-        # 4. Apply Filters (Only if they are not "All" and not None)
         if p_val and p_val != "All":
             qs = qs.filter(priority__name__iexact=p_val)
 
