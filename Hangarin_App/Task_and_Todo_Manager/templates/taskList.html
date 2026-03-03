@@ -145,9 +145,16 @@
                                     <p style="text-align: center;" class="fw-bold mb-0">{{ object.category }}</p>
                                 </div>
                             </td>
-                            <td>
-                                <a href="taskList/{{ object.id }}">Edit</a>
-                                <a href="taskList/{{ object.id }}/delete" class="text-danger">Delete</a>
+                            <td class="icon-col">
+                                <a href="taskList/{{ object.id }}/view" class="text-danger">
+                                    <img src="{% static 'img/View.png' %}" alt="" class="icon" title="View">
+                                </a>
+                                <a href="taskList/{{ object.id }}">
+                                    <img src="{% static 'img/Edit.png' %}" alt="" class="icon" title="Edit">
+                                </a>
+                                <a href="taskList/{{ object.id }}/delete" class="text-danger">
+                                    <img src="{% static 'img/Remove.png' %}" alt="" class="icon" title="Delete">
+                                </a>
                             </td>
                         </tr>
                     {% endfor %}

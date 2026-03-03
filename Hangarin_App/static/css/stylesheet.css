@@ -109,7 +109,7 @@
 
 .table td,
 .table th {
-    padding-right: 50px;  
+    padding-right: 30px;  
     vertical-align: middle;
     white-space: nowrap;      
     overflow: hidden;        
@@ -146,3 +146,18 @@
 .category-red {color: #B42318; }
 .category-darkPurple {color: #363F72; }
 .category-pink {color: #C11574; }
+
+.icon{
+    height: 25px;
+    width: 25px;
+}
+
+.icon-col a{
+    text-decoration: none;
+}
+
+.dashboard-card:hover{
+    z-index: 1;
+    transform: translate(0,-20px);
+    transition: transform 0.3s ease-in-out;
+}
