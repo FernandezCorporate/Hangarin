@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from Task_and_Todo_Manager.models import Task
+from Task_and_Todo_Manager.models import Task, SubTask, Note
 from Task_and_Todo_Manager.forms import TaskForm
 from django.urls import reverse_lazy
 from django.db.models import Q, F
@@ -118,3 +118,28 @@ class TaskDeleteView(DeleteView):
     model = Task
     template_name = 'task_del.html'
     success_url = reverse_lazy('task-list')
+
+class SubTaskListView(ListView):
+    model = SubTask
+    context_object_name = 'subTask'
+    template_name = 'subtaskList.html'
+    paginate_by = 3
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        qs = qs.filter(parent_task_id=self.kwargs['pk'])
+        return qs
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        parent_Task = Task.objects.get(id=self.kwargs['pk'])
+        context["title"] = parent_Task.title
+        context["description"] = parent_Task.description
+        context["status"] = parent_Task.status
+        context["category"] = parent_Task.category
+        context["priority"] = parent_Task.priority
+        context["deadline"] = parent_Task.deadline
+
+        context["notes"] = Note.objects.filter(task=parent_Task)
+        return context

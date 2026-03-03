@@ -1,0 +1,114 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<div class="container mt-0 info-container">
+
+    <div class="card container mb-2 p-3" style="height: 70vh;">
+        <div class="row">
+            <div class="col-8">
+                <div class="row">
+                    <p style="color:#033F64;font-size: 30px;" class="mb-1"><span class="fw-bold">Title: </span>{{ title }}</p>
+                </div>
+                <div class="row ps-2">
+                    <div class="col-auto priority
+                            {% if priority.name == 'Low' %}priority-green
+                            {% elif priority.name == 'Medium' %}priority-blue
+                            {% elif priority.name == 'High' %}priority-red
+                            {% elif priority.name == 'Optional' %}priority-grey
+                            {% elif priority.name == 'Critical' %}priority-scarlet
+                            {% endif %}">
+                        <p style="text-align: center;" class="fw-bold mb-0">{{ priority }}</p>
+                    </div>
+                    <div class="col-auto category
+                            {% if category.name == 'School' %}category-purple
+                            {% elif category.name == 'Projects' %}category-red
+                            {% elif category.name == 'Personal' %}category-pink
+                            {% elif category.name == 'Work' %}category-darkPurple
+                            {% elif category.name == 'Finance' %}category-green
+                            {% endif %}">
+                        <p style="text-align: center;" class="fw-bold mb-0">{{ category }}</p>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <p style="color:#033F64;font-size: 15px;" class="mb-1"><span class="fw-bold">Due on: </span>{{ deadline }}</p>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <p style="color:#033F64;font-size: 15px;" class="mb-1">{{ description }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4 mt-2 text-end">
+                <div class="row justify-content-end me-3">
+                    <div class="
+                        {% if status == 'Pending' %}status-yellow
+                        {% elif status == 'In Progress ' %}status-blue
+                        {% elif status == 'Completed' %}status-green
+                        {% endif %}" style="width: 150px; height: 40px; border-radius: 25px;display: flex;align-items: center;justify-content: center;">
+                        <p style="text-align: center;" class="fw-bold mb-0">{{ status }}</p>
+                    </div>
+                </div>
+            </div>
+
+        <div class="row">
+            <div class="col-7">
+                <div style="display: flex; gap: 10px;">
+                    <p style="color:#033F64;font-size: 20px;" class="mb-1"><strong>Subtasks</strong></p>
+                    <a href="taskList/{{ object.id }}">
+                        <img src="{% static 'img/Add New.png' %}" alt="" class="icon" title="Edit">
+                    </a>
+                </div>
+                <table class="table mb-0" style="border-top: solid 3px #91C8EA;">
+                    <thead>
+                        <tr>
+                            <th scope="col">Title</th>
+                            <th scope="col" class="text-center">Status</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for object in object_list %}
+                            <tr>
+                                <td>{{ object.title }}</td>
+                                <td class="text-center">
+                                    <div class="status
+                                            {% if object.status == 'Pending' %}status-yellow
+                                            {% elif object.status == 'In Progress ' %}status-blue
+                                            {% elif object.status == 'Completed' %}status-green
+                                            {% endif %}">
+                                        <p style="text-align: center;" class="fw-bold mb-0">{{ object.status }}</p>
+                                    </div>
+                                </td>
+                                <td class="icon-col">
+                                    <a href="taskList/{{ object.id }}">
+                                        <img src="{% static 'img/Edit.png' %}" alt="" class="icon" title="Edit">
+                                    </a>
+                                    <a href="taskList/{{ object.id }}/delete" class="text-danger">
+                                        <img src="{% static 'img/Remove.png' %}" alt="" class="icon" title="Delete">
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="col-5">
+                <div style="display: flex; gap: 10px;">
+                    <p style="color:#033F64;font-size: 20px;" class="mb-1"><strong>Notes</strong></p>
+                    <a href="taskList/{{ object.id }}">
+                        <img src="{% static 'img/Add New.png' %}" alt="" class="icon" title="Edit">
+                    </a>
+                </div>
+
+                <div class="scrollable-section border p-3">
+                    {% for note in notes %}
+                    <div class="item mb-2 p-2 bg-light">{{ note.content }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+    {% include 'includes/pagination.html' %}
+    </div>
+</div>
+{% endblock %}
