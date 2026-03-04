@@ -45,18 +45,18 @@ class HomePageView(ListView):
 
         if completed > 0:
             completion_rate = int((completed/context["total_tasks"]) * 100)
+            
+            if completed_onTime:
+                compliancy_rate = int((completed_onTime/completed) * 100)
+            else:
+                compliancy_rate = 0
+
+            if completed_late:
+                deliquency_rate = int((completed_late/completed) * 100)
+            else:
+                deliquency_rate = 0
         else:
             completion_rate = 0
-
-        if completed_onTime:
-            compliancy_rate = int((completed_onTime/completed) * 100)
-        else:
-            compliancy_rate = 0
-
-        if completed_late:
-            deliquency_rate = int((completed_late/completed) * 100)
-        else:
-            deliquency_rate = 0
 
 
         context["Completion_rate"] = f"{completion_rate}%"
