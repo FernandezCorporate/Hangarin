@@ -45,7 +45,7 @@ class HomePageView(ListView):
 
         if completed > 0:
             completion_rate = int((completed/context["total_tasks"]) * 100)
-            
+
             if completed_onTime:
                 compliancy_rate = int((completed_onTime/completed) * 100)
             else:
@@ -146,12 +146,11 @@ class SubTaskListView(ListView):
         completedSubTask = SubTask.objects.filter(status="Completed", parent_task_id=self.kwargs['pk']).count()
         allSubtask = SubTask.objects.filter(parent_task_id=self.kwargs['pk']).count()
 
-        if completedSubTask > 0:
+        if allSubtask > 0:
             subTaskProgress = int((completedSubTask/allSubtask) * 100)
-            context["progress"] = f"{subTaskProgress}%"
-        
+            context["progress"] = f"{subTaskProgress}%"   
         else:
-            context["progress"] = "N/A"
+                context["progress"] = "N/A"
         
         return context
         
