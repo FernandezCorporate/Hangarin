@@ -27,10 +27,7 @@
                         <p style="text-align: center;" class="fw-bold mb-0">{{ category }}</p>
                     </div>
                 </div>
-                <div class="row mt-3">
-                    <p style="color:#033F64;font-size: 15px;" class="mb-1"><span class="fw-bold">Due on: </span>{{ deadline }}</p>
-                </div>
-                <div class="row mt-2">
+                <div class="row mt-4 mb-4">
                     <div class="col-12">
                         <p style="color:#033F64;font-size: 15px;" class="mb-1">{{ description }}</p>
                     </div>
@@ -45,16 +42,20 @@
                         {% endif %}" style="width: 150px; height: 40px; border-radius: 25px;display: flex;align-items: center;justify-content: center;">
                         <p style="text-align: center;" class="fw-bold mb-0">{{ status }}</p>
                     </div>
+                    <div class="row mt-2">
+                        <p style="color:#033F64;font-size: 15px;" class="mb-1"><span class="fw-bold">Due on: </span>{{ deadline }}</p>
+                    </div>
                 </div>
             </div>
 
         <div class="row">
             <div class="col-7">
                 <div style="display: flex; gap: 10px;">
-                    <p style="color:#033F64;font-size: 20px;" class="mb-1"><strong>Subtasks</strong></p>
+                    <p style="color:#033F64;font-size: 15px;" class="mb-0"><strong>Subtasks</strong></p>
                     <a href="taskList/{{ object.id }}">
-                        <img src="{% static 'img/Add New.png' %}" alt="" class="icon" title="Edit">
+                        <img src="{% static 'img/Add New.png' %}" alt="" class="icon" title="Add Subtask">
                     </a>
+                    <p style="color:#033F64;font-size: 15px;margin-left: auto;" class="mb-0">Subtask progress: <strong>{{ progress }}</strong></p>
                 </div>
                 <table class="table mb-0" style="border-top: solid 3px #91C8EA;">
                     <thead>
@@ -93,12 +94,13 @@
             </div>
 
             <div class="col-5">
-                <div style="display: flex; gap: 10px;">
-                    <p style="color:#033F64;font-size: 20px;" class="mb-1"><strong>Notes</strong></p>
+                <div style="display: flex; gap: 10px;" class="ms-2">
+                    <p style="color:#033F64;font-size: 15px;" class="mb-1"><strong>Notes</strong></p>
                     <a href="taskList/{{ object.id }}">
-                        <img src="{% static 'img/Add New.png' %}" alt="" class="icon" title="Edit">
+                        <img src="{% static 'img/Add New.png' %}" alt="" class="icon" title="Add Note">
                     </a>
                 </div>
+
 
                 <div class="scrollable-section border p-3">
                     {% for note in notes %}

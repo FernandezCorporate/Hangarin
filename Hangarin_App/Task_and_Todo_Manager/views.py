@@ -142,4 +142,16 @@ class SubTaskListView(ListView):
         context["deadline"] = parent_Task.deadline
 
         context["notes"] = Note.objects.filter(task=parent_Task)
+
+        completedSubTask = SubTask.objects.filter(status="Completed", parent_task_id=self.kwargs['pk']).count()
+        allSubtask = SubTask.objects.filter(parent_task_id=self.kwargs['pk']).count()
+
+        if completedSubTask > 0:
+            subTaskProgress = int((completedSubTask/allSubtask) * 100)
+            context["progress"] = f"{subTaskProgress}%"
+        
+        else:
+            context["progress"] = "N/A"
+        
         return context
+        
