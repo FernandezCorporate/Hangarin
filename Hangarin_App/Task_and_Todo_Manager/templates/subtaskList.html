@@ -49,15 +49,15 @@
             </div>
 
         <div class="row">
-            <div class="col-7">
+            <div class="col-7" style="padding-right: 25px;">
                 <div style="display: flex; gap: 10px;">
                     <p style="color:#033F64;font-size: 15px;" class="mb-0"><strong>Subtasks</strong></p>
-                    <a href="taskList/{{ object.id }}">
+                    <a href="{% url 'subtask-form' taskId %}">
                         <img src="{% static 'img/Add New.png' %}" alt="" class="icon" title="Add Subtask">
                     </a>
                     <p style="color:#033F64;font-size: 15px;margin-left: auto;" class="mb-0">Subtask progress: <strong>{{ progress }}</strong></p>
                 </div>
-                <table class="table mb-0" style="border-top: solid 3px #91C8EA;">
+                <table class="subtasks-table mb-0" style="border-top: solid 3px #91C8EA;">
                     <thead>
                         <tr>
                             <th scope="col">Title</th>

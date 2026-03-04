@@ -97,12 +97,12 @@
             <table class="table mt-2">
                 <thead>
                     <tr>
-                        <th scope="col">Title</th>
+                        <th scope="col" class="text-center">Title</th>
                         <th scope="col" class="text-center">Status</th>
-                        <th scope="col">Deadline</th>
-                        <th scope="col">Priority</th>
-                        <th scope="col">Category</th>
-                        <th scope="col">Action</th>
+                        <th scope="col" class="text-center">Deadline</th>
+                        <th scope="col" class="text-center">Priority</th>
+                        <th scope="col" class="text-center">Category</th>
+                        <th scope="col" class="text-center">Action</th>
                     </tr>
                 </thead>
 
@@ -145,7 +145,7 @@
                                     <p style="text-align: center;" class="fw-bold mb-0">{{ object.category }}</p>
                                 </div>
                             </td>
-                            <td class="icon-col">
+                            <td class="icon-col text-center">
                                 <a href="taskList/{{ object.id }}/subTask" class="text-danger">
                                     <img src="{% static 'img/View.png' %}" alt="" class="icon" title="View">
                                 </a>

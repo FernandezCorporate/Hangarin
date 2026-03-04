@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from Task_and_Todo_Manager.models import Task, SubTask, Note
-from Task_and_Todo_Manager.forms import TaskForm
+from Task_and_Todo_Manager.forms import TaskForm, SubTaskForm
 from django.urls import reverse_lazy
 from django.db.models import Q, F
 
@@ -134,6 +134,7 @@ class SubTaskListView(ListView):
         context = super().get_context_data(**kwargs)
 
         parent_Task = Task.objects.get(id=self.kwargs['pk'])
+        context["taskId"] = parent_Task.id
         context["title"] = parent_Task.title
         context["description"] = parent_Task.description
         context["status"] = parent_Task.status
@@ -154,3 +155,17 @@ class SubTaskListView(ListView):
         
         return context
         
+class SubTaskFormView(CreateView):
+    model = SubTask
+    form_class = SubTaskForm
+    template_name = 'subtask_form.html'
+
+    def get_success_url(self):
+        return reverse_lazy('subtask-list', kwargs={'pk': self.kwargs['pk']})
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        parent_task = Task.objects.get(id=self.kwargs['pk'])
+        context['parent_task'] = Task.objects.get(id=self.kwargs['pk'])
+        return context
+
