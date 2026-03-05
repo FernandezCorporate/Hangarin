@@ -80,7 +80,7 @@
                                     </div>
                                 </td>
                                 <td class="icon-col">
-                                    <a href="taskList/{{ object.id }}">
+                                    <a href="{% url 'subtask-edit' taskId object.id%}">
                                         <img src="{% static 'img/Edit.png' %}" alt="" class="icon" title="Edit">
                                     </a>
                                     <a href="taskList/{{ object.id }}/delete" class="text-danger">
