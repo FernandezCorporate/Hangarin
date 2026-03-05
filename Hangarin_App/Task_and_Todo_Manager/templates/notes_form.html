@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+
+                    <div class="header">
+                        <div class="card-title fw-bold mb-0 text-center p-4" style="font-size: 25px;">
+                            Add New Note
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <form method="post" novalidate>
+                            {% csrf_token %}
+
+                            {% if form.errors %}
+                            <script>
+                                alert("Please fill in all required fields.");
+                            </script>
+                            {% endif %}
+
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label>Parent Task</label>
+                                            <input type="text"
+                                                class="form-control"
+                                                value="{% if object %}{{ object.parent_task.title }}{% else %}{{ parent_task.title }}{% endif %}"
+                                                readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label>Parent Id</label>
+                                            <input type="text"
+                                                class="form-control"
+                                                value="{% if object %}{{ object.parent_task.id }}{% else %}{{ parent_task.id }}{% endif %}"
+                                                name="task"
+                                                readonly>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-12 mt-3">
+                                        <div class="form-group">
+                                            <label>Content</label>
+                                            {% render_field form.content class="form-control" rows="8"  %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                            <div class="form-group">
+                                <div class="col-md-12 mt-4 text-end">
+                                    <button type="submit" class="btn btn-primary btn-rounded">
+                                        Submit
+                                    </button>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -96,7 +96,7 @@
             <div class="col-5">
                 <div style="display: flex; gap: 10px;" class="ms-2">
                     <p style="color:#033F64;font-size: 15px;" class="mb-1"><strong>Notes</strong></p>
-                    <a href="taskList/{{ object.id }}">
+                    <a href="{% url 'note-form' taskId %}">
                         <img src="{% static 'img/Add New.png' %}" alt="" class="icon" title="Add Note">
                     </a>
                 </div>
