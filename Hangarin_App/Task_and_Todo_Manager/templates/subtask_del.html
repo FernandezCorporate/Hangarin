@@ -1,0 +1,28 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+	<div class="content">
+		<div class="container-fluid">
+			<h4 class="page-title text-center">Delete SubTask</h4>
+			<div class="row d-flex justify-content-center">
+				<div class="col-md-6">
+					<div class="card">
+
+						<div class="col-md-12 text-center">
+							<div class="card-body">
+								<form class="" action="" method="post" novalidate>
+									<p>Are you sure you want to delete the Subtask: "{{ object }}"?</p>
+									{% csrf_token %}
+									<div class="form-group">
+										<div class="col-md-12 col-sm-3 text-center">
+											<button type="submit" class="btn btn-primary btn-rounded">Submit</button>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

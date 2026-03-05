@@ -43,6 +43,9 @@
                         <p style="text-align: center;" class="fw-bold mb-0">{{ status }}</p>
                     </div>
                     <div class="row mt-2">
+                        <p style="color:#033F64;font-size: 15px;" class="mb-0"><span class="fw-bold">Created at: </span>{{ created }}</p>
+                    </div>
+                    <div class="row mt-2">
                         <p style="color:#033F64;font-size: 15px;" class="mb-1"><span class="fw-bold">Due on: </span>{{ deadline }}</p>
                     </div>
                 </div>
@@ -83,7 +86,7 @@
                                     <a href="{% url 'subtask-edit' taskId object.id%}">
                                         <img src="{% static 'img/Edit.png' %}" alt="" class="icon" title="Edit">
                                     </a>
-                                    <a href="taskList/{{ object.id }}/delete" class="text-danger">
+                                    <a href="{% url 'subtask-delete' taskId object.id%}" class="text-danger">
                                         <img src="{% static 'img/Remove.png' %}" alt="" class="icon" title="Delete">
                                     </a>
                                 </td>

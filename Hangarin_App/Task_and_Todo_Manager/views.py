@@ -141,6 +141,7 @@ class SubTaskListView(ListView):
         context["category"] = parent_Task.category
         context["priority"] = parent_Task.priority
         context["deadline"] = parent_Task.deadline
+        context["created"] = parent_Task.created_at
 
         context["notes"] = Note.objects.filter(task=parent_Task)
 
@@ -193,3 +194,10 @@ class SubTaskEditView(UpdateView):
         context = super().get_context_data(**kwargs)
         context['parent_task'] = Task.objects.get(id=self.kwargs['task_pk'])
         return context
+    
+class SubTaskDeleteView(DeleteView):
+    model = SubTask
+    template_name = 'subtask_del.html'
+
+    def get_success_url(self):
+        return reverse_lazy('subtask-list', kwargs={'pk': self.kwargs['task_pk']})
