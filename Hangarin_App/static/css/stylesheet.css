@@ -190,6 +190,11 @@
     background-color: #555;
 }
 
+.note-container {
+    background-color: #D9D9D9;
+    color: #2b2a2a;
+}
+
 .subtasks-table {
     width: 100%;
     table-layout: fixed; 
