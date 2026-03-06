@@ -10,7 +10,7 @@
     </head>
     <body>
         <div class="wrapper">
-            <div class="container ms-0 sidebar">
+            <div class="container ms-0 sidebar d-flex flex-column align-items-center justify-content-evenly">
                 <div class="row justify-content-center title">
                     <div class="col-12 text-center pt-3">
                         <p class="fw-bolder Appname">Hangarin</p>
@@ -43,6 +43,19 @@
                         <a href="" class="nav-link text-white d-flex align-items center">
                             <img src="{% static 'img/Settings.png' %}" alt="" class="me-2"  style="margin-top: 2px;">
                             Settings
+                        </a>
+                    </li>
+                </ul>
+
+                <ul class="nav flex-column text-left">
+                    <li class="nav-misc">
+                        <a href="" class="nav-link text-white d-flex align-items center">
+                            Account
+                        </a>
+                    </li>
+                    <li class="nav-misc">
+                        <a href="" class="nav-link text-white d-flex align-items center">
+                            Logout
                         </a>
                     </li>
                 </ul>

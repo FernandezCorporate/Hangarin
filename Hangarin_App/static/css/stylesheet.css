@@ -4,23 +4,19 @@
 
 .sidebar{
     background-color: #1F8ED3;
-    width: 25vw;
+    width: 15vw;
     height: 100vh;
     box-shadow: 10px 0 10px rgba(0, 0, 0, 0.5); 
 }
 
 .Appname{
-    font-size: 55px;
+    font-size: 30px;
     color: #FFFFFF;
 }
 
-.title{
-    margin-bottom: 80px;
-}
-
 .me-2{
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
 }
 
 .nav-item{
@@ -28,7 +24,7 @@
 }
 
 .nav-link{
-    font-size: 30px;
+    font-size: 20px;
 }
 
 .wrapper{
@@ -236,4 +232,10 @@
     justify-content: center;
     width: 100px;
     margin: auto;
+}
+
+.page-link{
+    border-radius: 50px;
+    margin-right: 10px;
+
 }
